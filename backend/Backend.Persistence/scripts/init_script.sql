@@ -1,0 +1,33 @@
+CREATE DATABASE SlipStreamAssessmentDb;
+GO
+
+
+USE ClientManagement;
+GO
+
+CREATE TABLE Clients (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    Gender NVARCHAR(10) NOT NULL,
+    DateOfBirth DATE NOT NULL
+);
+GO
+
+CREATE TABLE Addresses (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Type NVARCHAR(50) NOT NULL,
+    Details NVARCHAR(255) NOT NULL,
+    ClientId INT NOT NULL,
+    FOREIGN KEY (ClientId) REFERENCES Clients(Id) ON DELETE CASCADE
+);
+GO
+
+CREATE TABLE PhoneNumbers (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Number NVARCHAR(50) NOT NULL,
+    Type NVARCHAR(50) NOT NULL,
+    ClientId INT NOT NULL,
+    FOREIGN KEY (ClientId) REFERENCES Clients(Id) ON DELETE CASCADE
+);
+GO
